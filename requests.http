@@ -1,0 +1,185 @@
+### Get all foods
+GET http://localhost:3000/api/foods
+
+
+### Create new food
+POST http://localhost:3000/api/foods
+content-type: application/json
+
+{
+    "name": "flour",
+    "brand": "generic",
+    "isFood": true,
+    "measures": [
+        {
+            "label": "grams",
+            "quantity": 125,
+            "calories": 455,
+            "carbs": 95,
+            "fat": 1.2,
+            "protein": 13
+        },
+        {
+            "label": "cup(s)",
+            "quantity": 1,
+            "calories": 455,
+            "carbs": 95,
+            "fat": 1.2,
+            "protein": 13
+        }
+    ]
+}
+
+
+### Get a single food
+GET http://localhost:3000/api/foods/1
+
+
+### Search foods
+GET http://localhost:3000/api/foods?q=yog
+
+
+### Update food
+PATCH http://localhost:3000/api/foods/1
+content-type: application/json
+
+{
+    "calories": 100
+}
+
+### Delete food
+DELETE  http://localhost:3000/api/foods/1
+content-type: application/json
+
+
+### Create a new user
+POST http://localhost:3000/api/auth/register
+content-type: application/json
+
+{
+    "name": "Test User",
+    "email": "test@user.com",
+    "username": "testuser",
+    "password": "password1234"
+}
+
+### Login user
+POST http://localhost:3000/api/auth/login
+content-type: application/json
+
+{
+    "username": "testuser",
+    "password": "password1234"
+}
+
+### Check user
+GET http://localhost:3000/api/auth/whoami
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0MjYyNTMwNywiZXhwIjoxNjQ1MjE3MzA3fQ.TFF57jmkL0Y_6wPpXXEum7Sbinl9z96F3ehDIQwav5A
+
+### Get all recipes
+GET http://localhost:3000/api/recipes
+
+### Get a single recipe
+GET http://localhost:3000/api/recipes/1
+
+### Create a new recipe
+POST http://localhost:3000/api/recipes
+content-type: application/json
+
+{ "recipe": {
+    "name": "Test Recipe II",
+    "description": "Yummy!",
+    "servings": 4,
+    "ingredients": [
+        {
+            "food": {
+                "id": 3,
+                "name": "banana",
+                "brand": "generic",
+                "isFood": true,
+                "measures": [
+                    {
+                    "id": 3,
+                    "label": "medium",
+                    "quantity": 1,
+                    "calories": 105,
+                    "carbs": 27,
+                    "fat": 0,
+                    "protein": 1
+                    }
+                ]
+            },
+            "measureId": 3,
+            "quantity": 2,
+            "notes": "mashed"
+        },
+        {
+            "food": {
+                "id": 4,
+                "name": "egg",
+                "brand": "generic",
+                "isFood": true,
+                "measures": [
+                    {
+                    "id": 4,
+                    "label": "large",
+                    "quantity": 1,
+                    "calories": 72,
+                    "carbs": 0,
+                    "fat": 4,
+                    "protein": 6
+                    }
+                ]
+            },
+            "measureId": 4,
+            "quantity": 1,
+            "notes": "beaten"
+        },
+        {
+            "food": {
+                    "id": 2,
+                    "name": "flour",
+                    "brand": "generic",
+                    "isFood": true,
+                    "measures": [
+                        {
+                        "id": 1,
+                        "label": "grams",
+                        "quantity": 125,
+                        "calories": 455,
+                        "carbs": 95,
+                        "fat": 1,
+                        "protein": 13
+                        },
+                        {
+                        "id": 2,
+                        "label": "cup(s)",
+                        "quantity": 1,
+                        "calories": 455,
+                        "carbs": 95,
+                        "fat": 1,
+                        "protein": 13
+                        }
+                    ]
+            },
+            "measureId": 2,
+            "quantity": 1,
+            "notes": ""
+        }
+    ],
+    "steps": [
+        {
+            "order": 1,
+            "instruction": "Mix all ingredients."
+        },
+        {
+            "order": 2,
+            "instruction": "Pour into pan."
+        },
+        {
+            "order": 3,
+            "instruction": "Bake."
+        }
+    ]
+}
+}
