@@ -21,7 +21,7 @@ export class FoodsController {
 
     //@UseGuards(AdminGuard)
     @Post()
-    createFoods(@Body() body: any) {
+    createFoods(@Body() body: CreateFoodDto) {
         console.log(body);
         return this.foodsService.create(body);
     }

@@ -26,10 +26,10 @@ export class RecipesController {
         fileFilter: imageFileFilter
     }))
     createRecipe(@Body() body: any, @UploadedFile() file) {
-        console.log(body.recipe);
-        //const newRecipe = JSON.parse(body.recipe);
+        console.log(body, file);
+        const newRecipe = JSON.parse(body.recipe);
         return this.recipeService.create({
-            ...body.recipe,
+            ...newRecipe,
             imagePath: (file) ? file.filename : ""
         });
     }
