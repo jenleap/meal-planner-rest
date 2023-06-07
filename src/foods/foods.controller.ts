@@ -11,7 +11,7 @@ export class FoodsController {
     constructor(public foodsService: FoodsService) {}
 
     @Get()
-    getFoods(@Query('q') q: string, @Query('page') page: number = 1, @Query('per') perPage: number = 10) {
+    getFoods(@Query('q') q: string, @Query('page') page = 1, @Query('per') perPage = 10) {
         if (q) {
             return this.foodsService.searchFoods(q, page, perPage);
         } else {

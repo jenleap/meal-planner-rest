@@ -1,5 +1,5 @@
 ### Get all foods
-GET http://localhost:3000/api/foods
+GET http://localhost:3002/api/foods
 
 
 ### Create new food
@@ -87,32 +87,10 @@ POST http://localhost:3000/api/recipes
 content-type: application/json
 
 { "recipe": {
-    "name": "Test Recipe II",
+    "name": "Test Turkey Meatballs",
     "description": "Yummy!",
-    "servings": 4,
+    "servings": 24,
     "ingredients": [
-        {
-            "food": {
-                "id": 3,
-                "name": "banana",
-                "brand": "generic",
-                "isFood": true,
-                "measures": [
-                    {
-                    "id": 3,
-                    "label": "medium",
-                    "quantity": 1,
-                    "calories": 105,
-                    "carbs": 27,
-                    "fat": 0,
-                    "protein": 1
-                    }
-                ]
-            },
-            "measureId": 3,
-            "quantity": 2,
-            "notes": "mashed"
-        },
         {
             "food": {
                 "id": 4,
@@ -132,38 +110,60 @@ content-type: application/json
                 ]
             },
             "measureId": 4,
-            "quantity": 1,
+            "quantity": 2,
             "notes": "beaten"
         },
         {
-            "food": {
-                    "id": 2,
-                    "name": "flour",
-                    "brand": "generic",
-                    "isFood": true,
-                    "measures": [
-                        {
-                        "id": 1,
-                        "label": "grams",
-                        "quantity": 125,
-                        "calories": 455,
-                        "carbs": 95,
-                        "fat": 1,
-                        "protein": 13
-                        },
-                        {
-                        "id": 2,
-                        "label": "cup(s)",
-                        "quantity": 1,
-                        "calories": 455,
-                        "carbs": 95,
-                        "fat": 1,
-                        "protein": 13
-                        }
-                    ]
+            "food":  {
+                "id": 6,
+                "name": "large flake oats",
+                "brand": "Quaker",
+                "isFood": true,
+                "measures": [
+                    {
+                    "id": 6,
+                    "label": "cup",
+                    "quantity": 1,
+                    "calories": 330,
+                    "carbs": 60,
+                    "fat": 6,
+                    "protein": 12
+                    },
+                    {
+                    "id": 7,
+                    "label": "grams",
+                    "quantity": 30,
+                    "calories": 110,
+                    "carbs": 20,
+                    "fat": 2,
+                    "protein": 4
+                    }
+                ]
             },
-            "measureId": 2,
-            "quantity": 1,
+            "measureId": 6,
+            "quantity": 1.5,
+            "notes": ""
+        },
+        {
+            "food": {
+                "id": 5,
+                "name": "turkey, ground",
+                "brand": "generic",
+                "isFood": true,
+                "measures": [
+                    {
+                    "id": 5,
+                    "label": "grams",
+                    "quantity": 100,
+                    "calories": 203,
+                    "carbs": 0,
+                    "fat": 10,
+                    "protein": 27
+                    }
+                ]
+            },
+            "measureId": 5,
+            "quantity": 900,
             "notes": ""
         }
     ],

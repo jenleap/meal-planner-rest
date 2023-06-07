@@ -12,7 +12,7 @@ export class RecipesController {
     constructor(public recipeService: RecipesService) {}
 
     @Get()
-    getRecipes(@Query('page') page: number = 1, @Query('per') perPage: number = 10) {
+    getRecipes(@Query('page') page = 1, @Query('per') perPage = 10) {
         return this.recipeService.findAll(page, perPage);
     }
 

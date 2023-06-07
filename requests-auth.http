@@ -1,0 +1,23 @@
+### Create a new user
+POST http://localhost:3000/api/auth/register
+content-type: application/json
+
+{
+    "name": "Test User",
+    "email": "test@user.com",
+    "username": "testuser",
+    "password": "password1234"
+}
+
+### Login user
+POST http://localhost:3000/api/auth/login
+content-type: application/json
+
+{
+    "username": "testuser",
+    "password": "password1234"
+}
+
+### Check user
+GET http://localhost:3000/api/auth/whoami
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0MjYyNTMwNywiZXhwIjoxNjQ1MjE3MzA3fQ.TFF57jmkL0Y_6wPpXXEum7Sbinl9z96F3ehDIQwav5A

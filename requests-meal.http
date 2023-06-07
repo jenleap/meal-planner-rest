@@ -1,0 +1,92 @@
+### Get all meals
+GET http://localhost:3002/api/meals
+
+
+### Create new meal
+POST http://localhost:3002/api/meals
+content-type: application/json
+
+{
+    "name": "Test Meal 1",
+    "mealItems": [
+         {
+            "food": {
+                "id": 4,
+                "name": "egg",
+                "brand": "generic",
+                "isFood": true,
+                "measures": [
+                    {
+                    "id": 4,
+                    "label": "large",
+                    "quantity": 1,
+                    "calories": 72,
+                    "carbs": 0,
+                    "fat": 4,
+                    "protein": 6
+                    }
+                ]
+            },
+            "measureId": 4,
+            "quantity": 2
+        },
+        {
+            "food":  {
+                "id": 6,
+                "name": "large flake oats",
+                "brand": "Quaker",
+                "isFood": true,
+                "measures": [
+                    {
+                    "id": 6,
+                    "label": "cup",
+                    "quantity": 1,
+                    "calories": 330,
+                    "carbs": 60,
+                    "fat": 6,
+                    "protein": 12
+                    },
+                    {
+                    "id": 7,
+                    "label": "grams",
+                    "quantity": 30,
+                    "calories": 110,
+                    "carbs": 20,
+                    "fat": 2,
+                    "protein": 4
+                    }
+                ]
+            },
+            "measureId": 6,
+            "quantity": 1.5
+        },
+        {
+            "food": {
+                "id": 5,
+                "name": "turkey, ground",
+                "brand": "generic",
+                "isFood": true,
+                "measures": [
+                    {
+                    "id": 5,
+                    "label": "grams",
+                    "quantity": 100,
+                    "calories": 203,
+                    "carbs": 0,
+                    "fat": 10,
+                    "protein": 27
+                    }
+                ]
+            },
+            "measureId": 5,
+            "quantity": 200
+        }
+    ]
+}
+
+
+### Search meals
+GET http://localhost:3002/api/meals?q=yog
+
+
+
