@@ -1,9 +1,9 @@
-import { Controller, Get, UseGuards, Post, Body, Param, NotFoundException, UseInterceptors, ClassSerializerInterceptor, UploadedFile, Query } from '@nestjs/common';
+import { Controller, Get, UseGuards, Post, Body, Param, NotFoundException, UseInterceptors, ClassSerializerInterceptor, UploadedFile, Query, Res } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Express } from 'express';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from 'src/utils/file-helper';
 import { RecipesService } from './recipes.service';
+import { Response } from 'express';
 
 @Controller('api/recipes')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -43,5 +43,15 @@ export class RecipesController {
         } else {
             throw new NotFoundException("Recipe not found.");
         }
+    }
+
+    @Get('/image/:imagePath')
+    async getImage(
+        @Param('imagePath') imagePath: string,
+        @Res() res: Response
+    ) {
+        return res.sendFile(imagePath, {
+            root: 'uploads'
+        });
     }
 }
