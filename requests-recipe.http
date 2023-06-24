@@ -1,5 +1,5 @@
 ### Get all recipes
-GET http://localhost:3000/api/recipes
+GET http://localhost:3002/api/recipes
 
 ### Get a single recipe
 GET http://localhost:3000/api/recipes/1

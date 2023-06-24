@@ -1,0 +1,213 @@
+### Get all templates
+GET http://localhost:3002/api/planner/templates
+
+
+### Create new meal
+POST http://localhost:3002/api/planner/templates
+content-type: application/json
+
+{
+    "title": "Sample Template",
+    "plannerDays": [
+        {
+            "day": 0,
+            "foodBlocks": [
+                {
+                    "label": "Breakfast",
+                    "type": "meal",
+                    "order": 0
+                },
+                {
+                    "label": "Lunch",
+                    "type": "meal",
+                    "order": 1
+                },
+                {
+                    "label": "Afternoon Snack",
+                    "type": "snack",
+                    "order": 2
+                },
+                {
+                    "label": "Dinner",
+                    "type": "meal",
+                    "order": 3
+                }
+            ]
+        },
+            {
+                "day": 1,
+                "foodBlocks": [
+                    {
+                        "label": "Breakfast",
+                        "type": "meal",
+                        "order": 0
+                    },
+                    {
+                        "label": "Morning Snack",
+                        "type": "snack",
+                        "order": 1
+                    },
+                    {
+                        "label": "Lunch",
+                        "type": "meal",
+                        "order": 2
+                    },
+                    {
+                        "label": "Afternoon Snack",
+                        "type": "snack",
+                        "order": 3
+                    },
+                    {
+                        "label": "Dinner",
+                        "type": "meal",
+                        "order": 4
+                    }
+                ]
+        },
+        {
+                "day": 2,
+                "foodBlocks": [
+                    {
+                        "label": "Breakfast",
+                        "type": "meal",
+                        "order": 0
+                    },
+                    {
+                        "label": "Morning Snack",
+                        "type": "snack",
+                        "order": 1
+                    },
+                    {
+                        "label": "Lunch",
+                        "type": "meal",
+                        "order": 2
+                    },
+                    {
+                        "label": "Afternoon Snack",
+                        "type": "snack",
+                        "order": 3
+                    },
+                    {
+                        "label": "Dinner",
+                        "type": "meal",
+                        "order": 4
+                    }
+                ]
+        },
+         {
+                "day": 3,
+                "foodBlocks": [
+                    {
+                        "label": "Breakfast",
+                        "type": "meal",
+                        "order": 0
+                    },
+                    {
+                        "label": "Morning Snack",
+                        "type": "snack",
+                        "order": 1
+                    },
+                    {
+                        "label": "Lunch",
+                        "type": "meal",
+                        "order": 2
+                    },
+                    {
+                        "label": "Afternoon Snack",
+                        "type": "snack",
+                        "order": 3
+                    },
+                    {
+                        "label": "Dinner",
+                        "type": "meal",
+                        "order": 4
+                    }
+                ]
+        },
+         {
+                "day": 4,
+                "foodBlocks": [
+                    {
+                        "label": "Breakfast",
+                        "type": "meal",
+                        "order": 0
+                    },
+                    {
+                        "label": "Morning Snack",
+                        "type": "snack",
+                        "order": 1
+                    },
+                    {
+                        "label": "Lunch",
+                        "type": "meal",
+                        "order": 2
+                    },
+                    {
+                        "label": "Afternoon Snack",
+                        "type": "snack",
+                        "order": 3
+                    },
+                    {
+                        "label": "Dinner",
+                        "type": "meal",
+                        "order": 4
+                    }
+                ]
+        },
+         {
+                "day": 5,
+                "foodBlocks": [
+                    {
+                        "label": "Breakfast",
+                        "type": "meal",
+                        "order": 0
+                    },
+                    {
+                        "label": "Morning Snack",
+                        "type": "snack",
+                        "order": 1
+                    },
+                    {
+                        "label": "Lunch",
+                        "type": "meal",
+                        "order": 2
+                    },
+                    {
+                        "label": "Afternoon Snack",
+                        "type": "snack",
+                        "order": 3
+                    },
+                    {
+                        "label": "Dinner",
+                        "type": "meal",
+                        "order": 4
+                    }
+                ]
+        },
+        {
+            "day": 6,
+            "foodBlocks": [
+                {
+                    "label": "Breakfast",
+                    "type": "meal",
+                    "order": 0
+                },
+                {
+                    "label": "Lunch",
+                    "type": "meal",
+                    "order": 1
+                },
+                {
+                    "label": "Afternoon Snack",
+                    "type": "snack",
+                    "order": 2
+                },
+                {
+                    "label": "Dinner",
+                    "type": "meal",
+                    "order": 3
+                }
+            ]
+        }
+    ]
+}

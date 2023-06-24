@@ -10,7 +10,7 @@ export class MealsController {
     @Get()
     getMeals(@Query('q') q: string, @Query('page') page = 1, @Query('per') perPage = 10) {
         if (q) {
-            return this.mealsService.searchFoods(q, page, perPage);
+            return this.mealsService.searchMeals(q, page, perPage);
         } else {
             return this.mealsService.findAll(page, perPage);
         }
@@ -18,7 +18,7 @@ export class MealsController {
 
     //@UseGuards(AdminGuard)
     @Post()
-    createFoods(@Body() body: any) {
+    createMeal(@Body() body: any) {
         console.log(body);
         return this.mealsService.create(body);
     }

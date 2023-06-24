@@ -26,7 +26,7 @@ export class MealsService {
         }
     }
 
-    async searchFoods(query: string, page: number, perPage: number ) {
+    async searchMeals(query: string, page: number, perPage: number ) {
         const [meals, total] = await this.mealsRepo.findAndCount({
             where: {
                 name: Like(`%${query}%`)
