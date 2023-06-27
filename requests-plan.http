@@ -1,8 +1,289 @@
+### Get all plans
+GET http://localhost:3002/api/planner
+
+### Get single plan
+GET http://localhost:3002/api/planner/2
+
+
+### Create new plan
+POST http://localhost:3002/api/planner
+content-type: application/json
+
+{
+    "title": "Test Plan 2",
+    "plannerDays": [
+        {
+            "day": 0,
+            "foodBlocks": [
+                {
+                    "label": "Breakfast",
+                    "type": "meal",
+                    "order": 0,
+                    "foodItems": []
+                },
+                {
+                    "label": "Lunch",
+                    "type": "meal",
+                    "order": 1,
+                    "foodItems": []
+                },
+                {
+                    "label": "Afternoon Snack",
+                    "type": "snack",
+                    "order": 2,
+                    "foodItems": []
+                },
+                {
+                    "label": "Dinner",
+                    "type": "meal",
+                    "order": 3,
+                    "foodItems": []
+                }
+            ]
+        },
+        {
+                "day": 1,
+                "foodBlocks": [
+                    {
+                        "label": "Breakfast",
+                        "type": "meal",
+                        "order": 0,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Morning Snack",
+                        "type": "snack",
+                        "order": 1,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Lunch",
+                        "type": "meal",
+                        "order": 2,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Afternoon Snack",
+                        "type": "snack",
+                        "order": 3,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Dinner",
+                        "type": "meal",
+                        "order": 4,
+                        "foodItems": []
+                    }
+                ]
+        },
+        {
+                "day": 2,
+                "foodBlocks": [
+                    {
+                        "label": "Breakfast",
+                        "type": "meal",
+                        "order": 0,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Morning Snack",
+                        "type": "snack",
+                        "order": 1,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Lunch",
+                        "type": "meal",
+                        "order": 2,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Afternoon Snack",
+                        "type": "snack",
+                        "order": 3,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Dinner",
+                        "type": "meal",
+                        "order": 4,
+                        "foodItems": []
+                    }
+                ]
+        },
+        {
+                "day": 3,
+                "foodBlocks": [
+                    {
+                        "label": "Breakfast",
+                        "type": "meal",
+                        "order": 0,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Morning Snack",
+                        "type": "snack",
+                        "order": 1,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Lunch",
+                        "type": "meal",
+                        "order": 2,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Afternoon Snack",
+                        "type": "snack",
+                        "order": 3,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Dinner",
+                        "type": "meal",
+                        "order": 4,
+                        "foodItems": []
+                    }
+                ]
+        },
+        {
+                "day": 4,
+                "foodBlocks": [
+                    {
+                        "label": "Breakfast",
+                        "type": "meal",
+                        "order": 0,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Morning Snack",
+                        "type": "snack",
+                        "order": 1,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Lunch",
+                        "type": "meal",
+                        "order": 2,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Afternoon Snack",
+                        "type": "snack",
+                        "order": 3,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Dinner",
+                        "type": "meal",
+                        "order": 4,
+                        "foodItems": []
+                    }
+                ]
+        },
+        {
+                "day": 5,
+                "foodBlocks": [
+                    {
+                        "label": "Breakfast",
+                        "type": "meal",
+                        "order": 0,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Morning Snack",
+                        "type": "snack",
+                        "order": 1,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Lunch",
+                        "type": "meal",
+                        "order": 2,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Afternoon Snack",
+                        "type": "snack",
+                        "order": 3,
+                        "foodItems": []
+                    },
+                    {
+                        "label": "Dinner",
+                        "type": "meal",
+                        "order": 4,
+                        "foodItems": []
+                    }
+                ]
+        },
+        {
+            "day": 6,
+            "foodBlocks": [
+                {
+                    "label": "Breakfast",
+                    "type": "meal",
+                    "order": 0,
+                    "foodItems": []
+                },
+                {
+                    "label": "Lunch",
+                    "type": "meal",
+                    "order": 1,
+                    "foodItems": []
+                },
+                {
+                    "label": "Afternoon Snack",
+                    "type": "snack",
+                    "order": 2,
+                    "foodItems": []
+                },
+                {
+                    "label": "Dinner",
+                    "type": "meal",
+                    "order": 3,
+                    "foodItems": []
+                }
+            ]
+        }
+        
+    ],
+    "calories": 1450,
+    "carbs": 108,
+    "fat": 48,
+    "protein": 145
+}
+
+### Add food to plan
+PATCH http://localhost:3002/api/planner/34
+content-type: application/json
+
+{
+    "food": {
+      "id": 3,
+      "name": "banana",
+      "brand": "generic",
+      "isFood": true,
+      "measures": [
+        {
+          "id": 3,
+          "label": "medium",
+          "quantity": 1,
+          "calories": 105,
+          "carbs": 27,
+          "fat": 0,
+          "protein": 1
+        }
+      ]
+    },
+    "quantity": 2,
+    "measureId": 3
+}
+
 ### Get all templates
 GET http://localhost:3002/api/planner/templates
 
 
-### Create new meal
+### Create new template
 POST http://localhost:3002/api/planner/templates
 content-type: application/json
 

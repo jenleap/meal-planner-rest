@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { FoodBlock } from 'src/entities/food-block';
 import { Plan } from 'src/entities/plan';
 import { PlanTemplate } from 'src/entities/plan-template';
 import { Repository } from 'typeorm';
@@ -10,6 +11,7 @@ export class PlannerService {
     constructor(
         @InjectRepository(Plan) private plannerRepo: Repository<Plan>,
         @InjectRepository(PlanTemplate) private planTemplateRepo: Repository<PlanTemplate>,
+        @InjectRepository(FoodBlock) private foodBlockRepo: Repository<FoodBlock>,
         ) {}
 
     async findAll(page: number, perPage: number) {
@@ -17,14 +19,14 @@ export class PlannerService {
         const [ plans, total ] = await this.plannerRepo
             .createQueryBuilder("plan")
             .innerJoinAndSelect("plan.plannerDays", "plannerDay")
-                .innerJoinAndSelect("plannerDay.foodBlocks", "foodBlock")
-                    .innerJoinAndSelect("foodBlock.foodItems", "foodItem")
-                        .innerJoinAndSelect("foodItem.food", "food")
-                            .innerJoinAndSelect("food.measures", "measure")
+                .leftJoinAndSelect("plannerDay.foodBlocks", "foodBlock")
+                    .leftJoinAndSelect("foodBlock.foodItems", "foodItem")
+                       .leftJoinAndSelect("foodItem.food", "food")
+                            .leftJoinAndSelect("food.measures", "measure")
             .orderBy("plan.title", "ASC")
             .take(perPage)
             .skip(skip)
-            .getManyAndCount();
+            .getManyAndCount(); 
         return {
             plans,
             total,
@@ -32,10 +34,54 @@ export class PlannerService {
         }
     }
 
+    findById(id: number) {
+        return this.plannerRepo
+            .createQueryBuilder("plan")
+            .where("plan.id = :id", { id })
+            .innerJoinAndSelect("plan.plannerDays", "plannerDay")
+                .leftJoinAndSelect("plannerDay.foodBlocks", "foodBlock")
+                    .leftJoinAndSelect("foodBlock.foodItems", "foodItem")
+                       .leftJoinAndSelect("foodItem.food", "food")
+                            .leftJoinAndSelect("food.measures", "measure")
+            .getOne(); 
+    }
+
     create(plan: any) {
         const newPlan = this.plannerRepo.create(plan);
         return this.plannerRepo.save(newPlan);
     }
+
+    async addFoodToPlan(id: number, food: any) {
+       const foodBlock = await this.foodBlockRepo
+            .createQueryBuilder("foodBlock")
+            .where("foodBlock.id = :id", { id })
+            .leftJoinAndSelect("foodBlock.foodItems", "foodItem")
+                .leftJoinAndSelect("foodItem.food", "food")
+                    .leftJoinAndSelect("food.measures", "measure")
+            .getOne();
+
+       if (!foodBlock) {
+        throw new Error("Food block not found");
+       }
+
+       foodBlock.foodItems.push(food);
+
+       return this.foodBlockRepo.save(foodBlock);
+    }
+
+    async removeFood(blockId: number, foodId: number) {
+        const foodBlock = await this.foodBlockRepo.findOneBy({ id: blockId });
+ 
+        if (!foodBlock) {
+         throw new Error("Food block not found");
+        }
+ 
+        const newFoodList = foodBlock.foodItems.filter(item => item.id != foodId);
+
+        foodBlock.foodItems = newFoodList;
+ 
+        return this.foodBlockRepo.save(foodBlock);
+     }
 
     async findAllTemplates(page: number, perPage: number) {
         const skip = (page - 1) * perPage;

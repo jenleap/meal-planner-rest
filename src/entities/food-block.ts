@@ -28,12 +28,15 @@ export class FoodBlock {
     get nutritionalInfo() {
         const nutrientGroup = { ...nutrientObj };
 
-        this.foodItems.forEach(item => {
-            Object.keys(nutrientGroup).map(key => {
-                const multiplier = item.quantity / item.measure.quantity;
-                nutrientGroup[key] = nutrientGroup[key] + ( item.measure[key] * multiplier);
-            })
-        });
+        if (this.foodItems.length > 0) {
+            this.foodItems.forEach(item => {
+                console.log(item);
+                Object.keys(nutrientGroup).map(key => {
+                    const multiplier = item.quantity / item.measure.quantity;
+                    nutrientGroup[key] = nutrientGroup[key] + ( item.measure[key] * multiplier);
+                })
+            });
+        }
 
         return nutrientGroup;
     }

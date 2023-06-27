@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Post, Query, UseInterceptors } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, Param, Patch, Post, Query, UseInterceptors } from '@nestjs/common';
 import { PlannerService } from './planner.service';
 
 @Controller('api/planner')
@@ -9,14 +9,28 @@ export class PlannerController {
 
     @Get()
     getPlans(@Query('page') page = 1, @Query('per') perPage = 10) {
-            return this.plannerService.findAll(page, perPage);
+        return this.plannerService.findAll(page, perPage);
+    }
+
+    @Get('/:id')
+    getPlan(@Param('id') id: string,) {
+        return this.plannerService.findById(parseInt(id));
     }
 
     //@UseGuards(AdminGuard)
     @Post()
     createPlan(@Body() body: any) {
-        console.log(body);
         return this.plannerService.create(body);
+    }
+
+    @Patch('/:id')
+    addFood(@Param('id') id: string, @Body() body: any) {
+        return this.plannerService.addFoodToPlan(parseInt(id), body);
+    }
+
+    @Patch('/:blockId/:foodId')
+    removeFood(@Param('blockId') blockId: string, @Param('foodId') foodId: string) {
+        return this.plannerService.removeFood(parseInt(blockId), parseInt(foodId));
     }
 
     @Get('/templates')

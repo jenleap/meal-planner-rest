@@ -28,6 +28,7 @@ export class Plan {
 
     @Expose()
     get dailyMacros() {
+        console.log(this.title);
         const nutrientGroup = { ...nutrientObj };
 
         this.plannerDays.forEach(day => {
