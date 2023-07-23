@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FoodBlock } from 'src/entities/food-block';
+import { FoodItem } from 'src/entities/food-item';
 import { Plan } from 'src/entities/plan';
 import { PlanTemplate } from 'src/entities/plan-template';
 import { Repository } from 'typeorm';
@@ -12,6 +13,7 @@ export class PlannerService {
         @InjectRepository(Plan) private plannerRepo: Repository<Plan>,
         @InjectRepository(PlanTemplate) private planTemplateRepo: Repository<PlanTemplate>,
         @InjectRepository(FoodBlock) private foodBlockRepo: Repository<FoodBlock>,
+        @InjectRepository(FoodItem) private foodItemRepo: Repository<FoodItem>,
         ) {}
 
     async findAll(page: number, perPage: number) {
@@ -69,8 +71,31 @@ export class PlannerService {
        return this.foodBlockRepo.save(foodBlock);
     }
 
-    async removeFood(blockId: number, foodId: number) {
-        const foodBlock = await this.foodBlockRepo.findOneBy({ id: blockId });
+    async updateFood(id: number, quantity: number) {
+        const foodItem = await this.foodItemRepo
+            .createQueryBuilder("foodItem")
+            .where("foodItem.id = :id", { id })
+            .leftJoinAndSelect("foodItem.food", "food")
+                .leftJoinAndSelect("food.measures", "measure")
+            .getOne();
+ 
+        if (!foodItem) {
+         throw new Error("Food item not found");
+        }
+ 
+        foodItem.quantity = quantity;
+ 
+        return this.foodItemRepo.save(foodItem);
+    }
+
+    async removeFood(id: number, foodId: number) {
+        const foodBlock = await this.foodBlockRepo
+        .createQueryBuilder("foodBlock")
+        .where("foodBlock.id = :id", { id })
+        .leftJoinAndSelect("foodBlock.foodItems", "foodItem")
+            .leftJoinAndSelect("foodItem.food", "food")
+                .leftJoinAndSelect("food.measures", "measure")
+        .getOne();
  
         if (!foodBlock) {
          throw new Error("Food block not found");

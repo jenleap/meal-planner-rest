@@ -3,10 +3,10 @@ import { PrimaryGeneratedColumn, Entity, ManyToOne, Column } from "typeorm";
 import { Food } from "./food.entity";
 import { Meal } from "./meal";
 import { FoodBlock } from "./food-block";
+import { nutrientObj } from "src/utils/constants";
 
 @Entity()
 export class FoodItem {
-    @Exclude()
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -36,6 +36,17 @@ export class FoodItem {
     @Expose()
     get measureLabel() {
         return this.measure.label;
+    }
+
+    @Expose()
+    get nutritionalInfo() {
+        const nutrientGroup = { ...nutrientObj };
+
+        Object.keys(nutrientGroup).map(key => {
+            nutrientGroup[key] = this.measure[key] * (this.quantity / this.measure.quantity);
+        })
+
+        return nutrientGroup;
     }
 
 }

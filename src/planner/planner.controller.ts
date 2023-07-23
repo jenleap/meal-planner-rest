@@ -28,6 +28,12 @@ export class PlannerController {
         return this.plannerService.addFoodToPlan(parseInt(id), body);
     }
 
+    @Patch('/amount-update/:foodId')
+    updateFood(@Param('foodId') foodId: string, @Body() body: any) {
+        console.log(body);
+        return this.plannerService.updateFood(parseInt(foodId), parseInt(body.quantity));
+    }
+
     @Patch('/:blockId/:foodId')
     removeFood(@Param('blockId') blockId: string, @Param('foodId') foodId: string) {
         return this.plannerService.removeFood(parseInt(blockId), parseInt(foodId));

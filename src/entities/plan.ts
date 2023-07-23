@@ -28,7 +28,6 @@ export class Plan {
 
     @Expose()
     get dailyMacros() {
-        console.log(this.title);
         const nutrientGroup = { ...nutrientObj };
 
         this.plannerDays.forEach(day => {
@@ -38,7 +37,7 @@ export class Plan {
         });
 
         Object.keys(nutrientGroup).map(key => {
-            nutrientGroup[key] = nutrientGroup[key] / 7;
+            nutrientGroup[key] = Math.round(nutrientGroup[key] / 7);
         })
 
         return nutrientGroup;

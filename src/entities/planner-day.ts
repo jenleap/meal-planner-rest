@@ -28,6 +28,10 @@ export class PlannerDay {
             })
         });
 
+        Object.keys(nutrientGroup).map(key => {
+            nutrientGroup[key] = Math.round(nutrientGroup[key]);
+        })
+
         return nutrientGroup;
     }
 

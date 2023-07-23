@@ -1,7 +1,12 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { Repository, Like, getRepository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Food } from "src/entities/food.entity";
+import * as path from 'path';
+import * as mime from 'mime-types';
+import { createWorker, createScheduler, RecognizeResult } from 'tesseract.js';
+import * as fs from 'fs';
+import { getCalories } from "src/utils/nutrient-sum";
 
 @Injectable()
 export class FoodsService {
@@ -77,5 +82,30 @@ export class FoodsService {
         }
 
         return this.foodsRepo.remove(food);
+    }
+
+    async scanLabel(image) {
+        const imageType = mime.extension(image.mimetype);
+        const imagePath = `${image.path}.${imageType}`;
+
+        try {
+            await fs.promises.rename(image.path, imagePath);
+
+            const worker = await createWorker();
+  
+            await worker.loadLanguage('eng');
+            await worker.initialize('eng');
+  
+            const { data } = await worker.recognize(imagePath);
+        
+            await worker.terminate();
+  
+            return { 
+                text: data.text, 
+                calories: getCalories(data.text),
+            };
+        } catch (error) {
+            throw new InternalServerErrorException('Error performing OCR');
+        }
     }
 }

@@ -30,13 +30,16 @@ export class FoodBlock {
 
         if (this.foodItems.length > 0) {
             this.foodItems.forEach(item => {
-                console.log(item);
                 Object.keys(nutrientGroup).map(key => {
                     const multiplier = item.quantity / item.measure.quantity;
                     nutrientGroup[key] = nutrientGroup[key] + ( item.measure[key] * multiplier);
                 })
             });
         }
+
+        Object.keys(nutrientGroup).map(key => {
+            nutrientGroup[key] = Math.round(nutrientGroup[key]);
+        })
 
         return nutrientGroup;
     }

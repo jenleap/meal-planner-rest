@@ -24,3 +24,35 @@ export const nutrientSumObj = (items) => {
     }, {...nutrientObj});
 }
 
+export const getCalories = (data) => {
+    let calories = null;
+
+    //const regex = /Calories \/ Calories (\d+) c/g;
+    const regex = /Calories \/ Calories (\d+)/;
+    const match = regex.exec(data);
+
+    console.log(match, data);
+
+    if (match && match.length > 1) {
+        calories = parseInt(match[1]);
+    }
+
+    return calories;
+}
+
+export const getCarbs = (data) => {
+    let calories = null;
+
+    //const regex = /Calories \/ Calories (\d+) c/g;
+    const regex = /Calories \/ Calories (\d+)/;
+    const match = regex.exec(data);
+
+    console.log(match, data);
+
+    if (match && match.length > 1) {
+        calories = parseInt(match[1]);
+    }
+
+    return calories;
+}
+
