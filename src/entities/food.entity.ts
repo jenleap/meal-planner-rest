@@ -17,4 +17,7 @@ export class Food {
 
     @Column({ default: true })
     isFood: boolean;
+
+    @Column({ default: null })
+    macroType: "protein" | "carb" | "fat" | null;
 }

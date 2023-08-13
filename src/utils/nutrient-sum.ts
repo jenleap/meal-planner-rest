@@ -24,6 +24,26 @@ export const nutrientSumObj = (items) => {
     }, {...nutrientObj});
 }
 
+export const calculateCalories = (protein, carbs, fat) => {
+    return (protein * 4) + (carbs * 4) + (fat * 9);
+}
+
+export const calculateNutrientGroup = (items, macroKey) => {
+    const nutrientGroup = { ...nutrientObj };
+
+        items.forEach(item => {
+            Object.keys(nutrientGroup).map(key => {
+                nutrientGroup[key] = nutrientGroup[key] + item[macroKey][key];
+            })
+        });
+
+        Object.keys(nutrientGroup).map(key => {
+            nutrientGroup[key] = Math.round(nutrientGroup[key]);
+        })
+
+        return nutrientGroup;
+}
+
 export const getCalories = (data) => {
     let calories = null;
 

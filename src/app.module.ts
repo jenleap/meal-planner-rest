@@ -24,6 +24,14 @@ import { PlannerDayTemplate } from "./entities/planner-day-template";
 import { FoodBlock } from "./entities/food-block";
 import { FoodBlockTemplate } from "./entities/food-block-template";
 import { FoodItem } from "./entities/food-item";
+import { PlannerProModule } from "./planner-pro/planner-pro.module";
+import { TemplatePro } from "./entities/template-pro";
+import { TemplateProDay } from "./entities/template-pro-day";
+import { PlanPro } from "./entities/plan-pro";
+import { MealBlock } from "./entities/meal-block";
+import { FoodItemPro } from "./entities/food-item-pro";
+import { FoodBlockPro } from "./entities/food-block-pro";
+import { PlanProDay } from "./entities/plan-pro-day";
 
 @Module({
   imports: [
@@ -51,7 +59,14 @@ import { FoodItem } from "./entities/food-item";
         PlannerDayTemplate,
         FoodBlock,
         FoodBlockTemplate,
-        FoodItem
+        FoodItem,
+        TemplatePro,
+        TemplateProDay,
+        PlanPro,
+        MealBlock,
+        FoodItemPro,
+        FoodBlockPro,
+        PlanProDay
       ],
       synchronize: true,
     }),
@@ -63,6 +78,7 @@ import { FoodItem } from "./entities/food-item";
     RecipesModule,
     MealsModule,
     PlannerModule,
+    PlannerProModule
   ],
   controllers: [AppController],
   providers: [AppService],

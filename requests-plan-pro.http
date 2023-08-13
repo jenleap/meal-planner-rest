@@ -1,0 +1,11 @@
+### Get all plans
+GET http://localhost:3002/api/planner-pro
+
+### Get single plan
+GET http://localhost:3002/api/planner-pro/3
+
+### Get all templates
+GET http://localhost:3002/api/planner-pro/templates
+
+### Get a single template
+GET http://localhost:3002/api/planner-pro/templates/4
