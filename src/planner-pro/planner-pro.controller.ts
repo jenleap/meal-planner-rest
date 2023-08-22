@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Param, Patch, Post, Query, UseInterceptors } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Patch, Post, Query, UseInterceptors } from '@nestjs/common';
 import { PlannerProService } from './planner-pro.service';
 
 @Controller('api/planner-pro')
@@ -67,4 +67,16 @@ export class PlannerProController {
 
         return template; 
     }
+
+    @Delete('/templates/:id')
+    removeTemplate(@Param('id') id: string) {
+        return this.plannerService.removeTemplate(parseInt(id));
+    }
+
+    @Delete('/:id')
+    removePlan(@Param('id') id: string) {
+        return this.plannerService.remove(parseInt(id));
+    }
+
+    
 }

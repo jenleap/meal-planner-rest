@@ -2,10 +2,10 @@
 GET http://localhost:3002/api/recipes
 
 ### Get a single recipe
-GET http://localhost:3000/api/recipes/1
+GET http://localhost:3002/api/recipes/4
 
 ### Create a new recipe
-POST http://localhost:3000/api/recipes
+POST http://localhost:3002/api/recipes
 content-type: application/json
 
 { "recipe": {

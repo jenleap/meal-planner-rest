@@ -2,19 +2,20 @@ import { Injectable, InternalServerErrorException, NotFoundException } from "@ne
 import { Repository, Like, getRepository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Food } from "src/entities/food.entity";
-import * as path from 'path';
 import * as mime from 'mime-types';
-import { createWorker, createScheduler, RecognizeResult } from 'tesseract.js';
+import { createWorker } from 'tesseract.js';
 import * as fs from 'fs';
 import { getCalories } from "src/utils/nutrient-sum";
+import { FoodRecipe } from "src/entities/food-recipe";
 
 @Injectable()
 export class FoodsService {
 
-    constructor(@InjectRepository(Food) private foodsRepo: Repository<Food>) {}
+    constructor(@InjectRepository(Food) private foodsRepo: Repository<Food>,
+    @InjectRepository(FoodRecipe) private foodRecipeRepo: Repository<FoodRecipe>) {}
 
     findOne(id: number) {
-        return this.foodsRepo.findOneBy({ id });
+        return this.foodsRepo.findOne({ where: { id }, relations: { measures: true} });
     }
 
     async findAll(page: number, perPage: number) {
@@ -82,6 +83,33 @@ export class FoodsService {
         }
 
         return this.foodsRepo.remove(food);
+    }
+
+    async createFoodByRecipe(food, recipeId) {
+        console.log("food", food);
+        const foodRecipe = await this.findByRecipeId(recipeId);
+        if (foodRecipe) {
+            foodRecipe.food = food;
+            return this.foodRecipeRepo.save(foodRecipe);
+        } else {
+            const newFoodRecipe = {
+                recipeId,
+                food: food
+            };
+            const createdFoodRecipe = await this.foodRecipeRepo.create(newFoodRecipe);
+            return this.foodRecipeRepo.save(createdFoodRecipe);
+        }
+        
+    }
+
+    findByRecipeId(recipeId: number) {
+        //return this.foodRecipeRepo
+            //.createQueryBuilder("foodRecipe")
+            //.where("foodRecipe.recipeId = :recipeId", { recipeId })
+            //.leftJoinAndSelect("foodRecipe.food", "food")
+            //    .leftJoinAndSelect("food.measures", "measure")
+            //.getOne();
+        return this.foodRecipeRepo.findOne({ where: { recipeId }});
     }
 
     async scanLabel(image) {

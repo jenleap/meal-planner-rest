@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FoodBlockPro } from 'src/entities/food-block-pro';
 import { FoodItemPro } from 'src/entities/food-item-pro';
@@ -172,4 +172,24 @@ export class PlannerProService {
  
         return this.templateProDayRepo.save(templateDay);
      }
+
+     async remove(id: number) {
+        const plan = await this.plannerRepo.findOneBy({ id });
+
+        if (!plan) {
+            throw new NotFoundException("Plan not found");
+        }
+
+        return this.plannerRepo.remove(plan);
+    }
+
+    async removeTemplate(id: number) {
+        const template = await this.templateProRepo.findOneBy({ id });
+
+        if (!template) {
+            throw new NotFoundException("Template not found");
+        }
+
+        return this.templateProRepo.remove(template);
+    }
 }

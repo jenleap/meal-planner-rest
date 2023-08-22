@@ -19,7 +19,7 @@ export class FoodBlockPro {
     @Column()
     label: string;
 
-    @OneToMany(() => FoodItemPro, (foodItem) => foodItem.foodBlock, { cascade: ["insert"] })
+    @OneToMany(() => FoodItemPro, (foodItem) => foodItem.foodBlock, { cascade: ["insert"], onDelete: 'CASCADE' })
     foodItems: FoodItemPro[];
 
     @Exclude()

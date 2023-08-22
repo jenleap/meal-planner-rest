@@ -11,11 +11,13 @@ import * as path from 'path';
 import * as mime from 'mime-types';
 import { createWorker, createScheduler, RecognizeResult } from 'tesseract.js';
 import * as fs from 'fs';
+import { RecipesService } from 'src/recipes/recipes.service';
 
 @Controller('api/foods')
 export class FoodsController {
 
-    constructor(public foodsService: FoodsService) {}
+    constructor(public foodsService: FoodsService,
+        public recipeService: RecipesService) {}
 
     @Get()
     getFoods(@Query('q') q: string, @Query('page') page = 1, @Query('per') perPage = 10) {
@@ -31,6 +33,49 @@ export class FoodsController {
     createFoods(@Body() body: CreateFoodDto) {
         console.log(body);
         return this.foodsService.create(body);
+    }
+
+    //@UseGuards(AdminGuard)
+    @Post('/recipes')
+    createFoodByRecipeId(@Body() body) {
+        console.log(body);
+        return this.foodsService.createFoodByRecipe(body.food, body.recipeId);
+    }
+
+    @Get('/recipes/:id')
+    async getFoodByRecipeId(@Param('id') id: string) {
+        const foodRecipe = await this.foodsService.findByRecipeId(parseInt(id));
+
+        console.log("FR:", foodRecipe);
+
+        if (foodRecipe && foodRecipe.food) {
+            return foodRecipe.food;
+        } else {
+            const recipe = await this.recipeService.findOne(parseInt(id));
+
+            console.log("R:", recipe);
+            if (recipe) {
+                const newFood = {
+                    name: recipe.name,
+                    brand: "homemade",
+                    measures: [
+                        {
+                        quantity: 1,
+                        label: "serving",
+                        calories: recipe.nutritionalInfo.calories,
+                        protein: recipe.nutritionalInfo.protein,
+                        carbs: recipe.nutritionalInfo.carbs,
+                        fat: recipe.nutritionalInfo.fat
+                        }
+                    ],
+                    isFood: false
+                }
+                const savedFood = await this.foodsService.create(newFood)
+                return this.foodsService.createFoodByRecipe(savedFood, parseInt(id)); 
+            } else {
+                throw new NotFoundException("Recipe not found.");
+            }
+        }
     }
 
     @Get('/:id')

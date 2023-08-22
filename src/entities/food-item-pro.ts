@@ -12,14 +12,12 @@ export class FoodItemPro {
     @ManyToOne(() => FoodBlockPro, (foodBlock) => foodBlock.foodItems)
     foodBlock: FoodBlockPro;
 
-    @Exclude()
     @ManyToOne(() => Food)
     food: Food;
 
     @Column({ type: "float" })
     quantity: number;
 
-    @Exclude()
     @Column()
     measureId: number;
 

@@ -32,6 +32,7 @@ import { MealBlock } from "./entities/meal-block";
 import { FoodItemPro } from "./entities/food-item-pro";
 import { FoodBlockPro } from "./entities/food-block-pro";
 import { PlanProDay } from "./entities/plan-pro-day";
+import { FoodRecipe } from "./entities/food-recipe";
 
 @Module({
   imports: [
@@ -66,7 +67,8 @@ import { PlanProDay } from "./entities/plan-pro-day";
         MealBlock,
         FoodItemPro,
         FoodBlockPro,
-        PlanProDay
+        PlanProDay,
+        FoodRecipe
       ],
       synchronize: true,
     }),

@@ -17,7 +17,7 @@ export class PlanProDay {
     @Column()
     day: number;
 
-    @OneToMany(() => FoodBlockPro, (foodBlock) => foodBlock.planDay, { cascade: ["insert"] })
+    @OneToMany(() => FoodBlockPro, (foodBlock) => foodBlock.planDay, { cascade: ["insert"], onDelete: 'CASCADE' })
     foodBlocks: FoodBlockPro[];
 
     @Expose()

@@ -15,6 +15,7 @@ import { imageFileFilter } from 'src/utils/file-helper';
       dest: './uploads'
     })],
   controllers: [RecipesController],
-  providers: [RecipesService]
+  providers: [RecipesService],
+  exports: [ RecipesService ]
 })
 export class RecipesModule {}
