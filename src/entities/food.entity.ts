@@ -12,12 +12,9 @@ export class Food {
     @Column()
     brand: string;
 
-    @OneToMany(() => Measure, (measure) => measure.food, { cascade: ["insert"] })
+    @OneToMany(() => Measure, (measure) => measure.food, { cascade: ["insert"]})
     measures: Measure[];
 
     @Column({ default: true })
     isFood: boolean;
-
-    @Column({ default: null })
-    macroType: "protein" | "carb" | "fat" | null;
 }

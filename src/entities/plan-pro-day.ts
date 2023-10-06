@@ -11,13 +11,13 @@ export class PlanProDay {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => PlanPro, (plan) => plan.planDays)
+    @ManyToOne(() => PlanPro, (plan) => plan.planDays, { onDelete: 'CASCADE' })
     plan: PlanPro;
 
     @Column()
     day: number;
 
-    @OneToMany(() => FoodBlockPro, (foodBlock) => foodBlock.planDay, { cascade: ["insert"], onDelete: 'CASCADE' })
+    @OneToMany(() => FoodBlockPro, (foodBlock) => foodBlock.planDay, { cascade: ["insert"]})
     foodBlocks: FoodBlockPro[];
 
     @Expose()

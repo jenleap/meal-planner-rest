@@ -105,3 +105,14 @@ content-type: application/json
     ]
 }
 }
+
+### Create a new category
+POST http://localhost:3002/api/recipes/categories
+content-type: application/json
+
+{
+    "category": "salads"
+}
+
+### Get all categories
+GET http://localhost:3002/api/recipes/categories

@@ -6,7 +6,7 @@ export class Measure {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => Food, (food) => food.measures)
+    @ManyToOne(() => Food, (food) => food.measures, { onDelete: 'CASCADE' })
     food: Food;
 
     @Column()

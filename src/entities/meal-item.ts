@@ -9,7 +9,7 @@ export class MealItem {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => Meal, (meal) => meal.mealItems)
+    @ManyToOne(() => Meal, (meal) => meal.mealItems, { onDelete: 'CASCADE' })
     meal: Meal;
 
     @ManyToOne(() => Food)

@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from "typeorm";
 import { MealItem } from "./meal-item";
 import { Expose } from "class-transformer";
 import { nutrientObj } from "src/utils/constants";
+import { MealTag } from "./meal-tag.entity";
 
 @Entity()
 export class Meal {
@@ -11,8 +12,11 @@ export class Meal {
     @Column()
     name: string;
 
-    @OneToMany(() => MealItem, (mealItem) => mealItem.meal, { cascade: ["insert"] })
+    @OneToMany(() => MealItem, (mealItem) => mealItem.meal, { cascade: ["insert"]})
     mealItems: MealItem[];
+
+    @ManyToMany(() => MealTag, (tag) => tag.meal)
+    tags: MealTag[];
 
     @Expose()
     get nutritionalInfo() {

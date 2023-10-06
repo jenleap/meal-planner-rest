@@ -9,7 +9,7 @@ export class FoodItemPro {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => FoodBlockPro, (foodBlock) => foodBlock.foodItems)
+    @ManyToOne(() => FoodBlockPro, (foodBlock) => foodBlock.foodItems, { onDelete: 'CASCADE' })
     foodBlock: FoodBlockPro;
 
     @ManyToOne(() => Food)

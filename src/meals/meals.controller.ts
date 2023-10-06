@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Post, Query, UseInterceptors } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Post, Query, UseInterceptors } from '@nestjs/common';
 import { MealsService } from './meals.service';
 
 @Controller('api/meals')
@@ -22,5 +22,21 @@ export class MealsController {
         console.log(body);
         return this.mealsService.create(body);
     }
+
+    @Get('/tags')
+    getMealTags() {
+        return this.mealsService.findAllTags();
+    }
+
+    @Post('/tags')
+    createTag(@Body() body: any) {
+        return this.mealsService.createTag(body);
+    }
+
+     //@UseGuards(AuthGuard)
+     @Delete('/:id')
+     removeFood(@Param('id') id: string) {
+         return this.mealsService.remove(parseInt(id));
+     }
 
 }

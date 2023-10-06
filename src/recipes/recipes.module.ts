@@ -7,10 +7,11 @@ import { Recipe } from 'src/entities/recipe.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { Step } from 'src/entities/step.entity';
 import { imageFileFilter } from 'src/utils/file-helper';
+import { RecipeCategory } from 'src/entities/recipe-category.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Recipe, Ingredient, Step]),
+    TypeOrmModule.forFeature([Recipe, Ingredient, Step, RecipeCategory]),
     MulterModule.register({
       dest: './uploads'
     })],

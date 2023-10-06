@@ -34,6 +34,16 @@ export class RecipesController {
         });
     }
 
+    @Get('/categories')
+    getRecipeCategories() {
+        return this.recipeService.findAllCategories();
+    }
+
+    @Post('/categories')
+    createCategory(@Body() body: any) {
+        return this.recipeService.createCategory(body);
+    }
+
     @Get('/:id')
     async getRecipe(@Param('id') id: string) {
         const recipe = await this.recipeService.findOne(parseInt(id));

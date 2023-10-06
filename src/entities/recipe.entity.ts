@@ -1,8 +1,9 @@
 import { Exclude, Expose } from "class-transformer";
 import { nutrientLabels, nutrientObj } from "src/utils/constants";
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from "typeorm";
 import { Ingredient } from "./ingredient.entity";
 import { Step } from "./step.entity";
+import { RecipeCategory } from "./recipe-category.entity";
 
 @Entity()
 export class Recipe {
@@ -21,11 +22,14 @@ export class Recipe {
     @Column()
     imagePath: string;
 
-    @OneToMany(() => Ingredient, (ingredient) => ingredient.recipe, { cascade: ["insert"] })
+    @OneToMany(() => Ingredient, (ingredient) => ingredient.recipe, { cascade: ["insert"]})
     ingredients: Ingredient[];
 
-    @OneToMany(() => Step, (step) => step.recipe, { cascade: ["insert"] })
+    @OneToMany(() => Step, (step) => step.recipe, { cascade: ["insert"]})
     steps: Step[];
+
+    @ManyToMany(() => RecipeCategory, (category) => category.recipe)
+    categories: RecipeCategory[];
 
     @Expose()
     get nutritionalInfo() {

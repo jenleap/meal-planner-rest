@@ -9,13 +9,13 @@ export class TemplateProDay {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => TemplatePro, (template) => template.days)
+    @ManyToOne(() => TemplatePro, (template) => template.days, { onDelete: 'CASCADE' })
     template: TemplatePro;
 
     @Column()
     dayIndex: number;
 
-    @OneToMany(() => MealBlock, (meal) => meal.templateDay, { cascade: ["insert"] })
+    @OneToMany(() => MealBlock, (meal) => meal.templateDay, { cascade: ["insert"]})
     meals: MealBlock[];
 
     @Expose()

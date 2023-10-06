@@ -7,13 +7,13 @@ export class PlannerDayTemplate {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => PlanTemplate, (plan) => plan.plannerDays)
+    @ManyToOne(() => PlanTemplate, (plan) => plan.plannerDays, { onDelete: 'CASCADE' })
     plan: PlanTemplate;
 
     @Column()
     day: number;
 
-    @OneToMany(() => FoodBlockTemplate, (foodBlock) => foodBlock.plannerDay, { cascade: ["insert"] })
+    @OneToMany(() => FoodBlockTemplate, (foodBlock) => foodBlock.plannerDay, { cascade: ["insert"]})
     foodBlocks: FoodBlockTemplate[];
 
 }

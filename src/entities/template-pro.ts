@@ -11,7 +11,7 @@ export class TemplatePro {
     @Column()
     title: string;
 
-    @OneToMany(() => TemplateProDay, (day) => day.template, { cascade: ["insert"] })
+    @OneToMany(() => TemplateProDay, (day) => day.template, { cascade: ["insert"]})
     days: TemplatePro[];
 
     @Expose()

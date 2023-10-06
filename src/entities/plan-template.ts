@@ -9,7 +9,7 @@ export class PlanTemplate {
     @Column()
     title: string;
 
-    @OneToMany(() => PlannerDayTemplate, (plannerDay) => plannerDay.plan, { cascade: ["insert"] })
+    @OneToMany(() => PlannerDayTemplate, (plannerDay) => plannerDay.plan, { cascade: ["insert"]})
     plannerDays: PlannerDayTemplate[];
 
 }

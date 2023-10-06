@@ -88,5 +88,9 @@ content-type: application/json
 ### Search meals
 GET http://localhost:3002/api/meals?q=yog
 
+### Delete meals
+DELETE  http://localhost:3002/api/meals/1
+content-type: application/json
+
 
 

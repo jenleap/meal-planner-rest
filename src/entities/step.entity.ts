@@ -6,7 +6,7 @@ export class Step {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => Recipe, (recipe) => recipe.steps)
+    @ManyToOne(() => Recipe, (recipe) => recipe.steps, { onDelete: 'CASCADE' })
     recipe: Recipe;
 
     @Column()

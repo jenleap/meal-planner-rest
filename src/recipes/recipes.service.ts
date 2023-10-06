@@ -2,12 +2,14 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Recipe } from 'src/entities/recipe.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { RecipeCategory } from 'src/entities/recipe-category.entity';
 
 @Injectable()
 export class RecipesService {
 
     constructor(
-        @InjectRepository(Recipe) private recipeRepo: Repository<Recipe>) {}
+        @InjectRepository(Recipe) private recipeRepo: Repository<Recipe>,
+        @InjectRepository(RecipeCategory) private categoryRepo: Repository<RecipeCategory>) {}
 
     findOne(id: number) {
         //return this.recipeRepo.findOne(id);
@@ -64,5 +66,14 @@ export class RecipesService {
         }
 
         return this.recipeRepo.remove(recipe);
+    }
+
+    createCategory(category: any) {
+        const newCat = this.categoryRepo.create(category);
+        return this.categoryRepo.save(newCat);
+    }
+
+    findAllCategories() {
+        return this.categoryRepo.find();
     }
 }

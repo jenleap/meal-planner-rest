@@ -11,7 +11,7 @@ export class Plan {
     @Column()
     title: string;
 
-    @OneToMany(() => PlannerDay, (plannerDay) => plannerDay.plan, { cascade: ["insert"] })
+    @OneToMany(() => PlannerDay, (plannerDay) => plannerDay.plan, { cascade: ["insert"]})
     plannerDays: PlannerDay[];
 
     @Column()

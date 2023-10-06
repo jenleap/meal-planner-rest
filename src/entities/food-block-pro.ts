@@ -10,7 +10,7 @@ export class FoodBlockPro {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => PlanProDay, (planDay) => planDay.foodBlocks)
+    @ManyToOne(() => PlanProDay, (planDay) => planDay.foodBlocks, { onDelete: 'CASCADE' })
     planDay: PlanProDay;
 
     @Column()
@@ -19,7 +19,7 @@ export class FoodBlockPro {
     @Column()
     label: string;
 
-    @OneToMany(() => FoodItemPro, (foodItem) => foodItem.foodBlock, { cascade: ["insert"], onDelete: 'CASCADE' })
+    @OneToMany(() => FoodItemPro, (foodItem) => foodItem.foodBlock, { cascade: ["insert"] })
     foodItems: FoodItemPro[];
 
     @Exclude()

@@ -8,7 +8,7 @@ export class MealBlock {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => TemplateProDay, (templateDay) => templateDay.meals)
+    @ManyToOne(() => TemplateProDay, (templateDay) => templateDay.meals, { onDelete: 'CASCADE' })
     templateDay: TemplateProDay;
 
     @Column()
