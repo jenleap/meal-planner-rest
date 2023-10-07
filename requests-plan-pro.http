@@ -4,8 +4,16 @@ GET http://localhost:3002/api/planner-pro
 ### Get single plan
 GET http://localhost:3002/api/planner-pro/3
 
+### Delete plan
+DELETE  http://localhost:3002/api/planner-pro/2
+content-type: application/json
+
 ### Get all templates
 GET http://localhost:3002/api/planner-pro/templates
 
 ### Get a single template
 GET http://localhost:3002/api/planner-pro/templates/4
+
+### Delete template
+DELETE  http://localhost:3002/api/planner-pro/templates/1
+content-type: application/json

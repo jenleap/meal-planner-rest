@@ -45,6 +45,9 @@ export class FoodsService {
                   .where("food.name like :search", { search:`%${query}%` })
                   .getMany(); */
         const [foods, total] = await this.foodsRepo.findAndCount({
+            relations: {
+                measures: true
+            },
             where: {
                 name: Like(`%${query}%`)
             },
