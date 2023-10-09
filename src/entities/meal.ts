@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from "typeorm";
 import { MealItem } from "./meal-item";
 import { Expose } from "class-transformer";
 import { nutrientObj } from "src/utils/constants";
@@ -15,7 +15,8 @@ export class Meal {
     @OneToMany(() => MealItem, (mealItem) => mealItem.meal, { cascade: ["insert"]})
     mealItems: MealItem[];
 
-    @ManyToMany(() => MealTag, (tag) => tag.meal)
+    @ManyToMany(() => MealTag, (tag) => tag.meal, { cascade: true })
+    @JoinTable()
     tags: MealTag[];
 
     @Expose()

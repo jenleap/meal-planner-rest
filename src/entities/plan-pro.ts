@@ -19,18 +19,22 @@ export class PlanPro {
 
     @Expose()
     get dailyMacros() {
-        const nutrientGroup = { ...nutrientObj };
-
-        this.planDays.forEach(day => {
+        if (this.planDays.length > 0) {
+            const nutrientGroup = { ...nutrientObj };
+            this.planDays.forEach(day => {
+                Object.keys(nutrientGroup).map(key => {
+                    nutrientGroup[key] = nutrientGroup[key] + day.dailyMacros[key];
+                })
+            });
+    
             Object.keys(nutrientGroup).map(key => {
-                nutrientGroup[key] = nutrientGroup[key] + day.dailyMacros[key];
+                nutrientGroup[key] = Math.round(nutrientGroup[key] / 7);
             })
-        });
-
-        Object.keys(nutrientGroup).map(key => {
-            nutrientGroup[key] = Math.round(nutrientGroup[key] / 7);
-        })
-
-        return nutrientGroup;
+    
+            return nutrientGroup;
+        } else {
+            return [];
+        }
+        
     }
 }

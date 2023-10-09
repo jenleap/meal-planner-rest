@@ -1,6 +1,6 @@
 import { Exclude, Expose } from "class-transformer";
 import { nutrientLabels, nutrientObj } from "src/utils/constants";
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from "typeorm";
 import { Ingredient } from "./ingredient.entity";
 import { Step } from "./step.entity";
 import { RecipeCategory } from "./recipe-category.entity";
@@ -28,7 +28,8 @@ export class Recipe {
     @OneToMany(() => Step, (step) => step.recipe, { cascade: ["insert"]})
     steps: Step[];
 
-    @ManyToMany(() => RecipeCategory, (category) => category.recipe)
+    @ManyToMany(() => RecipeCategory, (category) => category.recipe, { cascade: true})
+    @JoinTable()
     categories: RecipeCategory[];
 
     @Expose()

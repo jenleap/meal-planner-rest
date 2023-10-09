@@ -16,6 +16,7 @@ export class RecipesService {
         return this.recipeRepo
             .createQueryBuilder("recipe")
             .where("recipe.id = :id", { id })
+            .leftJoinAndSelect("recipe.categories", "category")
             .innerJoinAndSelect("recipe.steps", "steps")
             .innerJoinAndSelect("recipe.ingredients", "ingredient")
                 .innerJoinAndSelect("ingredient.food", "food")
@@ -27,6 +28,7 @@ export class RecipesService {
         const skip = (page - 1) * perPage;
         const [ recipes, total ] = await this.recipeRepo
             .createQueryBuilder("recipe")
+            .leftJoinAndSelect("recipe.categories", "category")
             .innerJoinAndSelect("recipe.steps", "steps")
             .innerJoinAndSelect("recipe.ingredients", "ingredient")
                 .innerJoinAndSelect("ingredient.food", "food")

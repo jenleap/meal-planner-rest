@@ -14,7 +14,7 @@ export class MealsService {
         const skip = (page - 1) * perPage;
         const [ meals, total ] = await this.mealsRepo
             .createQueryBuilder("meal")
-            .innerJoinAndSelect("meal.tags", "tag")
+            .leftJoinAndSelect("meal.tags", "tag")
             .innerJoinAndSelect("meal.mealItems", "mealItem")
                 .innerJoinAndSelect("mealItem.food", "food")
                     .innerJoinAndSelect("food.measures", "measure")
@@ -32,7 +32,7 @@ export class MealsService {
     findOne(id: number) {
          return this.mealsRepo
             .createQueryBuilder("meal")
-            .innerJoinAndSelect("meal.tags", "tag")
+            .leftJoinAndSelect("meal.tags", "tag")
             .innerJoinAndSelect("meal.mealItems", "mealItem")
                 .innerJoinAndSelect("mealItem.food", "food")
                     .innerJoinAndSelect("food.measures", "measure")
@@ -42,22 +42,56 @@ export class MealsService {
     }
 
     async searchMeals(query: string, page: number, perPage: number ) {
-        const [meals, total] = await this.mealsRepo.findAndCount({
-            where: {
-                name: Like(`%${query}%`)
-            },
-            relations: {
-                mealItems: true
-            },
-            take: perPage,
-            skip: (page - 1) * perPage
-        });
+        const skip = (page - 1) * perPage;
+        const [ meals, total ] = await this.mealsRepo
+            .createQueryBuilder("meal")
+            .where({ name: Like(`%${query}%`) })
+            .leftJoinAndSelect("meal.tags", "tag")
+            .innerJoinAndSelect("meal.mealItems", "mealItem")
+                .innerJoinAndSelect("mealItem.food", "food")
+                    .innerJoinAndSelect("food.measures", "measure")
+            .orderBy("meal.name", "ASC")
+            .skip(skip)
+            .take(perPage)
+            .getManyAndCount();
         
         return {
             meals,
             total,
             total_pages: Math.ceil(total / perPage)
         };        
+    }
+
+    async findByTag(tagId: number, page: number, perPage: number) {
+        const skip = (page - 1) * perPage;
+       /*  const [ meals, total ] = await this.mealTagRepo
+            .createQueryBuilder("mealTag")
+            .where({ id: tagId })
+            .select(["mealTag.meal"])
+            .innerJoinAndSelect("mealTag.meal", "meal")
+                .innerJoinAndSelect("meal.mealItems", "mealItem")
+                    .innerJoinAndSelect("mealItem.food", "food")
+                        .innerJoinAndSelect("food.measures", "measure")
+                .orderBy("meal.name", "ASC")
+            .take(perPage)
+            .skip(skip)
+            .getManyAndCount(); */
+        const [ meals, total ] = await this.mealsRepo
+            .createQueryBuilder("meal")
+            .leftJoinAndSelect("meal.tags", "tag")
+            .innerJoinAndSelect("meal.mealItems", "mealItem")
+                .innerJoinAndSelect("mealItem.food", "food")
+                    .innerJoinAndSelect("food.measures", "measure")
+            .where('tag.id =:id', { id: tagId })
+            .orderBy("meal.name", "ASC")
+            .skip(skip)
+            .take(perPage)
+            .getManyAndCount();
+        return {
+            meals,
+            total,
+            total_pages: Math.ceil(total / perPage)
+        }
     }
 
     create(meal: any) {

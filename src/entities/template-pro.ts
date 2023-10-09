@@ -16,19 +16,22 @@ export class TemplatePro {
 
     @Expose()
     get dailyMacros() {
-        const nutrientGroup = { ...nutrientObj };
+        if (this.days.length > 0) {
+            const nutrientGroup = { ...nutrientObj };
 
-        this.days.forEach(day => {
-            Object.keys(nutrientGroup).map(key => {
-                nutrientGroup[key] = nutrientGroup[key] + day.dailyMacros[key];
+            this.days.forEach(day => {
+                Object.keys(nutrientGroup).map(key => {
+                    nutrientGroup[key] = nutrientGroup[key] + day.dailyMacros[key];
+                });
             });
-        });
 
-        Object.keys(nutrientGroup).map(key => {
-            nutrientGroup[key] = Math.round(nutrientGroup[key] / 7);
-        })
+            Object.keys(nutrientGroup).map(key => {
+                nutrientGroup[key] = Math.round(nutrientGroup[key] / 7);
+            })
 
-        return nutrientGroup;
+            return nutrientGroup;
+        } else {
+            return [];
+        }
     }
-
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Post, Body, Param, NotFoundException, UseInterceptors, ClassSerializerInterceptor, UploadedFile, Query, Res } from '@nestjs/common';
+import { Controller, Get, UseGuards, Post, Body, Param, NotFoundException, UseInterceptors, ClassSerializerInterceptor, UploadedFile, Query, Res, Delete } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from 'src/utils/file-helper';
@@ -63,5 +63,11 @@ export class RecipesController {
         return res.sendFile(imagePath, {
             root: 'uploads'
         });
+    }
+
+    //@UseGuards(AuthGuard)
+    @Delete('/:id')
+    removeFood(@Param('id') id: string) {
+        return this.recipeService.remove(parseInt(id));
     }
 }

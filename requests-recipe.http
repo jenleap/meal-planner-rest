@@ -4,6 +4,11 @@ GET http://localhost:3002/api/recipes
 ### Get a single recipe
 GET http://localhost:3002/api/recipes/4
 
+### Delete recipe
+DELETE  http://localhost:3002/api/recipes/1
+content-type: application/json
+
+
 ### Create a new recipe
 POST http://localhost:3002/api/recipes
 content-type: application/json
